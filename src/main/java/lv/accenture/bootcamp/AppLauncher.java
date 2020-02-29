@@ -2,7 +2,9 @@ package lv.accenture.bootcamp;
 
 
 
+import lv.accenture.bootcamp.io.conveyor.DateAdjuster;
 import lv.accenture.bootcamp.io.conveyor.Pipeline;
+import lv.accenture.bootcamp.network.SunAPIService;
 import lv.accenture.bootcamp.spring.GoodbyeService;
 import lv.accenture.bootcamp.spring.GreetingService;
 import lv.accenture.bootcamp.spring.NotificationService;
@@ -27,6 +29,12 @@ public class AppLauncher implements CommandLineRunner {
     
     @Autowired
     private NotificationService notificationService;
+    
+    @Autowired 
+    private SunAPIService sunAPIService;
+    
+    @Autowired
+    private DateAdjuster dateAdjuster;
 
     public static void main(String[] args) {
         SpringApplication.run(AppLauncher.class);
@@ -38,10 +46,13 @@ public class AppLauncher implements CommandLineRunner {
 //        goodbyeService.sayGoodbye("world");
 //        pipeline.performConversions();
     	
-    	User user = new User("Vasya Pupkin", "1234567", "v.pupkin@gmail.com");
-    	notificationService.spamPerson(user);
+//    	User user = new User("Vasya Pupkin", "1234567", "v.pupkin@gmail.com");
+//    	notificationService.spamPerson(user);
     	
+    	sunAPIService.getSunrise("today");
+    	sunAPIService.getSunrise("2020-03-17");
     	
+    	dateAdjuster.adjustLectionTime();
     	
     }
 }
